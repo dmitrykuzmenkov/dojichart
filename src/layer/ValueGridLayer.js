@@ -7,7 +7,7 @@ var ValueLabel = require("../element/ValueLabel");
 
 const _default_config = {
   lineSpacing: 50,
-  lineColor: "#BBBBBB",
+  lineColor: "#ebebeb",
   showLabels: true,
   labelColor: "#555555",
   labelFont: "7pt normal normal arial;",

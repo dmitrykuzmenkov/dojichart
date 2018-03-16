@@ -12,7 +12,7 @@ module.exports = function() {
     const COMP_WIDTH = 100;
     const COMP_HEIGHT = 50;
 
-    const LINE_COLOR = "#BBBBBB";
+    const LINE_COLOR = "#ebebeb";
     const SHOW_LABELS = true;
     const LABEL_COLOR = "#555555";
     const LABEL_FONT = "7pt normal normal arial;";

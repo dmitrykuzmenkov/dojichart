@@ -9816,7 +9816,7 @@ var Layer = require("../layer/Layer");
 var VerticalLine = require("../element/VerticalLine");
 
 var _default_config = {
-  lineColor: "#BBBBBB",
+  lineColor: "#ebebeb",
   showLabels: true,
   labelColor: "#555555",
   labelFont: "7pt normal normal arial;"
@@ -10019,7 +10019,7 @@ var ValueLabel = require("../element/ValueLabel");
 
 var _default_config = {
   lineSpacing: 50,
-  lineColor: "#BBBBBB",
+  lineColor: "#ebebeb",
   showLabels: true,
   labelColor: "#555555",
   labelFont: "7pt normal normal arial;",
