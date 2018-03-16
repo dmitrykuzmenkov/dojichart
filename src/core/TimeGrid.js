@@ -61,7 +61,6 @@ class TimeGrid extends Type {
     var data_gran = data.getGranularity();
 
     var grid_gran = this.granularity;
-
     if(grid_gran === undefined)
     {
       grid_gran = TimeGrid.determineTimeGranularity(data_gran, count, width, line_spacing);
@@ -82,7 +81,7 @@ class TimeGrid extends Type {
       }
     }
 
-    this._pixelToTimeString = this.getPixelToTimeStringMapper(width, count, offset, data_arr, data_gran);
+    this._pixelToTimeString = this.getPixelToTimeStringMapper(width, count, offset, data_arr, data_gran, field_map.time);
 
   }
 
@@ -94,7 +93,7 @@ class TimeGrid extends Type {
    * @param {timeseries.DataPoint[]} data_arr
    * @param {string} data_gran
    */
-  getPixelToTimeStringMapper(pixel_width, interval_count, offset, data_arr, data_gran) {
+  getPixelToTimeStringMapper(pixel_width, interval_count, offset, data_arr, data_gran, field_name) {
     var format = "ddd D HH:mm";
     if(data_gran === "D" || data_gran === "W")
     {
@@ -105,7 +104,7 @@ class TimeGrid extends Type {
       var dat = data_arr[offset + index];
       if(dat)
       {
-        return Moment(dat.time).format(format);
+        return Moment(dat[field_name]).format(format);
       }
       else
       {
@@ -154,7 +153,6 @@ class TimeGrid extends Type {
     var gran = GRANS[grid_gran];
     var d = new Date(time_str);
     var d_prev = new Date(prev_time_str);
-    
     // M5, M10, M15 or M30
     if(gran.mins < 60 && TimeGrid.isNMinuteChange(gran.mins, d))
     {
@@ -418,7 +416,6 @@ class TimeGrid extends Type {
    * @static
    */
   static determineTimeGranularity(data_gran, intervals, pixel_width, pixel_spacing) {
-
     // e.g. 1000 px / 50 px => 20 divisions
     var div_count = pixel_width / pixel_spacing;
 
