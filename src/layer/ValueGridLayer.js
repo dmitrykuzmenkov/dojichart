@@ -144,8 +144,8 @@ class ValueGridLayer extends Layer {
     var divisions = pixel_height / pixel_spacing; // e.g. 300/20
     var seg = range / divisions;
 
-    var gran = value_step;
-    var prev_gran = value_step / 2;
+    var gran = value_step * 2;
+    var prev_gran = value_step;
     var gran_factors = [2.5, 2, 2]; // 1*2.5=2.5, 2.5*2=5, 5*2=10, 10*2.5=25, ...
     //var grans = [10000,5000,2500,1000,500,250,100,50,25,10,5,2.5,1,0.5,0.25,0.1,0.05,0.025,0.01,0.005,0.0025,0.0001,0.00005,0.000025,0.00001];
     var nextGran = function(current_value, i) {
