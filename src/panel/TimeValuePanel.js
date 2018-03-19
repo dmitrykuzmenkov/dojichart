@@ -8,7 +8,9 @@ var ValueGridLayer = require("../layer/ValueGridLayer");
 const _default_config = {
   paddingTop: 10,
   paddingBottom: 10,
-  primaryAtBack: false
+  primaryAtBack: false,
+  valueGridLayerConfig: {},
+  timeGridLayerConfig: {}
 };
 
 /**
@@ -47,16 +49,16 @@ class TimeValuePanel extends TimePanel {
       }
 
       // value grid
-      this.value_grid_layer = this.value_grid_layer || new ValueGridLayer({
+      this.value_grid_layer = this.value_grid_layer || new ValueGridLayer(_.extend(this.valueGridLayerConfig, {
         labelWidth: this.getParentChart().getPaddingRight(),
         lines: value_lines
-      });
+      }));
       this.value_grid_layer.setParentComponent(this);
 
       // time grid
-      this.time_grid_layer = this.time_grid_layer || new TimeGridLayer({
+      this.time_grid_layer = this.time_grid_layer || new TimeGridLayer(_.extend(this.timeGridLayerConfig, {
         timeGrid: this.getParentChart().getTimeGrid()
-      });
+      }));
       this.time_grid_layer.setParentComponent(this);
     }
 

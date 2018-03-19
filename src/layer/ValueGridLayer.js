@@ -11,7 +11,8 @@ const _default_config = {
   showLabels: true,
   labelColor: "#555555",
   labelFont: "7pt normal normal arial;",
-  labelPaddingLeft: 4 
+  labelPaddingLeft: 4,
+  valueStep: 0.0001
 };
 
 /**
@@ -79,10 +80,9 @@ class ValueGridLayer extends Layer {
       derived_lines = [];
 
       var denom = this.granularity;
-
       if(denom === undefined)
       {
-        denom = ValueGridLayer.determineValueGranularity(min, max, this.getHeight(), this.lineSpacing);
+        denom = ValueGridLayer.determineValueGranularity(min, max, this.getHeight(), this.lineSpacing, this.valueStep);
       }
 
       // e.g. var p = (Math.round(price_min * 400.0) / 400.0); // where denom = 0.0025
@@ -138,14 +138,14 @@ class ValueGridLayer extends Layer {
    * @param {number} pixel_spacing
    * @returns {number} number representing interval between horizontal grid lines
    */
-  static determineValueGranularity(min, max, pixel_height, pixel_spacing) {
+  static determineValueGranularity(min, max, pixel_height, pixel_spacing, value_step) {
 
     var range = max - min; // e.g. 1815-1762 or 1.4172-1.4069
     var divisions = pixel_height / pixel_spacing; // e.g. 300/20
     var seg = range / divisions;
 
-    var gran = 0.00001;
-    var prev_gran = 0.000005;
+    var gran = value_step;
+    var prev_gran = value_step / 2;
     var gran_factors = [2.5, 2, 2]; // 1*2.5=2.5, 2.5*2=5, 5*2=10, 10*2.5=25, ...
     //var grans = [10000,5000,2500,1000,500,250,100,50,25,10,5,2.5,1,0.5,0.25,0.1,0.05,0.025,0.01,0.005,0.0025,0.0001,0.00005,0.000025,0.00001];
     var nextGran = function(current_value, i) {
