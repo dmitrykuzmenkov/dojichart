@@ -12,6 +12,7 @@ const _default_config = {
   labelBgColor: "#000000",
   labelColor: "#FFFFFF",
   timeLabelWidth: 70,
+  valuePrecision: 4
 };
 
 /**
@@ -186,7 +187,7 @@ class Crosshair extends Type {
             context.fillStyle = this.labelBgColor;
             context.fill();
 
-            var value_text = "" + comp.pixelToValue(y).toFixed(4);
+            var value_text = "" + comp.pixelToValue(y).toFixed(this.valuePrecision);
 
             context.font = this.labelFont;
             context.textAlign = "left";
