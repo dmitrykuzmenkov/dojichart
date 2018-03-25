@@ -43,7 +43,13 @@ class Candle extends Element {
 
     var body_low, body_high, body_color;
 
-    if(this.close >= this.open)
+    if(this.close === this.open)
+    {
+      body_low = this.open;
+      body_high = this.close;
+      body_color = config.wickColor;
+    }
+    else if (this.close > this.open) 
     {
       body_low = this.open;
       body_high = this.close;
@@ -82,7 +88,7 @@ class Candle extends Element {
     var body_x = wick_x - Math.ceil((config.candleBodyWidth - 1) * 0.5);
     var body_y = valueToPixel(body_high);
     var body_w = config.candleBodyWidth;
-    var body_h = valueToPixel(body_low) - body_y;
+    var body_h = valueToPixel(body_low) - body_y + 1;
 
     context.beginPath();
     context.rect(body_x, body_y, body_w, body_h);
